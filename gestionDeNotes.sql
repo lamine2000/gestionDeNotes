@@ -2,7 +2,7 @@ drop database IF EXISTS gestionDeNotes;
 drop user IF EXISTS 'gdn'; 
 create database gestionDeNotes;
 create user 'gdn' identified by 'passer';
-grant all privileges on gestionDeNotes.* to lamine;
+grant all privileges on gestionDeNotes.* to 'gdn'@'%;
 use gestionDeNotes;
 
 create table Classe
