@@ -98,6 +98,7 @@ create table Note
 	typeNote VARCHAR(255) NOT NULL,
 	matiere VARCHAR(255) NOT NULL,
 	loginEtudiant VARCHAR(255) NOT NULL,
+	reclamation VARCHAR(255) DEFAULT NULL,
 	FOREIGN KEY (matiere) REFERENCES Matiere(nom),
 	FOREIGN KEY (loginEtudiant) REFERENCES Etudiant(login),
 	FOREIGN KEY (typeNote) REFERENCES TypeNote(type),
