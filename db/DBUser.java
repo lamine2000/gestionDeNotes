@@ -90,4 +90,35 @@ public class DBUser{
 		
 		return authentified;
 	}
+
+
+	public static String DBgetParamUser(String nomParam, String nomTable, String nomIdentifiant, String valeurIdentifiant){
+		String param = "";
+		Statement state = null;
+		ResultSet result = null;
+
+		String[] tabProprietes = chargerProprietes("jdbc.properties");
+		Connection conn = DBconnect(tabProprietes);
+		
+		try{
+			state = conn.createStatement();
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+		
+		try{
+			result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" where "+nomIdentifiant+"='"+valeurIdentifiant+"'");
+
+			if(result.next())
+				param = result.getObject(1).toString();
+
+			state.close();
+			result.close();
+
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		
+		return param;
+	}
 }
