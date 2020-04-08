@@ -6,34 +6,33 @@ grant all privileges on gestionDeNotes.* to 'gdn'@'%';
 FLUSH privileges;
 use gestionDeNotes;
 
-create table Classe
+create table Filiere
 (
 	nom VARCHAR(255) PRIMARY KEY
 );
 
-DESC Classe;
+DESC Filiere;
 
 create table Module
 (
-	nom VARCHAR(255) NOT NULL PRIMARY KEY,
+	nom VARCHAR(255) NOT NULL,
+	nomFiliere VARCHAR(255) NOT NULL,
 	semestre1 boolean NOT NULL DEFAULT false,
-	semestre2 boolean DEFAULT false
+	semestre2 boolean DEFAULT false,
+	PRIMARY KEY (nom, nomFiliere),
+	FOREIGN KEY (nomFiliere) REFERENCES Filiere(nom)
 );
 
 DESC Module;
 
-create table Filiere
+create table Classe
 (
 	nom VARCHAR(255) PRIMARY KEY,
-	nomModule1 VARCHAR(255) NOT NULL,
-	nomModule2 VARCHAR(255),
-	nomModule3 VARCHAR(255),
-	FOREIGN KEY (nomModule1) REFERENCES Module(nom),
-	FOREIGN KEY (nomModule2) REFERENCES Module(nom),
-	FOREIGN KEY (nomModule3) REFERENCES Module(nom)
+	nomFiliere VARCHAR(255),
+	FOREIGN KEY (nomFiliere) REFERENCES Filiere(nom)
 );
 
-DESC Filiere;
+DESC Classe;
 
 create table Etudiant 
 (
@@ -98,7 +97,7 @@ create table Note
 	typeNote VARCHAR(255) NOT NULL,
 	matiere VARCHAR(255) NOT NULL,
 	loginEtudiant VARCHAR(255) NOT NULL,
-	reclamation VARCHAR(255) DEFAULT NULL,
+	reclamation VARCHAR(255),
 	FOREIGN KEY (matiere) REFERENCES Matiere(nom),
 	FOREIGN KEY (loginEtudiant) REFERENCES Etudiant(login),
 	FOREIGN KEY (typeNote) REFERENCES TypeNote(type),
@@ -107,37 +106,32 @@ create table Note
 
 DESC Note;
 
-INSERT INTO TypeNote
-VALUES
-("cc"),
-("ds"),
-("tp");
-
-select * from TypeNote;
-
-INSERT INTO Classe
-VALUES
-("DSTI2-A"),
-("DSTI2-B"),
-("DUT2");
-
-select * from Classe;
-
-
-INSERT INTO Module
-VALUES
-("informatique", true, true),
-("mathematiques", true, false),
-("general", true, false);
-
-select * from Module;
 
 INSERT INTO Filiere
 VALUES
-("DST2","informatique", "mathematiques", "general"),
-("DUT2","informatique", "mathematiques", "general");
+("DST2"),
+("DUT2");
 
 select * from Filiere;
+
+INSERT INTO Module
+VALUES
+("informatique","DUT2", true, true),
+("mathematiques", "DUT2", true, false),
+("general", "DUT2", true, false),
+("informatique","DST2", true, true),
+("mathematiques", "DST2", true, false),
+("general", "DST2", true, false);
+
+select * from Module;
+
+INSERT INTO Classe
+VALUES
+("DSTI2-A","DST2"),
+("DSTI2-B","DST2"),
+("DUT2","DUT2");
+
+select * from Classe;
 
 INSERT INTO Etudiant
 VALUES
@@ -165,7 +159,6 @@ VALUES
 ("anglais",2,"general"),
 ("culture et societes",2,"general");
 
-
 select * from Matiere;
 
 INSERT INTO Professeur(login, password, nom, prenom, cours1, cours2, classe1, classe2, classe3)
@@ -174,8 +167,15 @@ VALUES
 ("avantminuit","linux","ba","mandicou","utilisation des se",NULL,"DSTI2-A","DSTI2-B","DUT2"),
 ("tftp","voiture","ouya","samuel","administration des reseaux",NULL,"DSTI2-A","DSTI2-B","DUT2");
 
-
 select * from Professeur;
+
+INSERT INTO TypeNote
+VALUES
+("cc"),
+("ds"),
+("tp");
+
+select * from TypeNote;
 
 INSERT INTO Note (valeur, typeNote, matiere, loginEtudiant)
 VALUES

@@ -92,7 +92,7 @@ public class DBUser{
 	}
 
 
-	public static String DBgetParamUser(String nomParam, String nomTable, String nomIdentifiant, String valeurIdentifiant){
+	public static String DBgetParam(String nomParam, String nomTable, String nomIdentifiant, String valeurIdentifiant){
 		String param = "";
 		Statement state = null;
 		ResultSet result = null;
@@ -120,5 +120,82 @@ public class DBUser{
 		}
 		
 		return param;
+	}
+
+	public static String[] DBgetListeNomClassesProfesseur(String log){
+		int i = 0;
+		String[] liste = new String[5];
+
+		Statement state = null;
+		ResultSet result = null;
+
+		String[] tabProprietes = chargerProprietes("jdbc.properties");
+		Connection conn = DBconnect(tabProprietes);
+		
+		try{
+			state = conn.createStatement();
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+		
+		for(i = 0; i < 5; i++)
+			liste[i] = null;
+
+		try{
+			for(i=0; i<5; i++){
+				result = state.executeQuery("SELECT classe"+i+1+" FROM Professeur WHERE login = "+log);
+
+				if(result.next())
+					liste[i] = result.getObject(1).toString();
+			}
+			
+			state.close();
+			result.close();
+
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		finally{
+			return liste;
+		}
+	}
+
+
+	public static String[] DBgetListeNomMatieresProfesseur(String log){
+		int i = 0;
+		String[] liste = new String[5];
+
+		Statement state = null;
+		ResultSet result = null;
+
+		String[] tabProprietes = chargerProprietes("jdbc.properties");
+		Connection conn = DBconnect(tabProprietes);
+		
+		try{
+			state = conn.createStatement();
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+		
+		for(i = 0; i < 2; i++)
+			liste[i] = null;
+
+		try{
+			for(i=0; i<2; i++){
+				result = state.executeQuery("SELECT cours"+i+1+" FROM Professeur WHERE login = "+log);
+
+				if(result.next())
+					liste[i] = result.getObject(1).toString();
+			}
+			
+			state.close();
+			result.close();
+
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		finally{
+			return liste;
+		}
 	}
 }

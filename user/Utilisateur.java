@@ -1,5 +1,5 @@
 package user;
-import db.*;
+import db.DBUser;
 
 public class Utilisateur{
 	//attrubuts
@@ -28,12 +28,12 @@ public class Utilisateur{
 	public String getPrenom(){return this.prenom;}
 
 	//methodes
-	public int connecterUser(){
+	public static int connecterUser(String log, String pass){
 		//verifier dans les tables Professeur et Etutiant s'il existe un enregistrement
 		// avec les memes login et password que l'objet courant
 		//retourne 1 si trouvé dans la table Etudiant, 2 pour Professeur et 0 si non existant dans la db
 
-		return DBUser.DBrechercherUser(this.login, this.password);
+		return DBUser.DBrechercherUser(log, pass);
 	}
 
 	/*public boolean deconnecter(){
