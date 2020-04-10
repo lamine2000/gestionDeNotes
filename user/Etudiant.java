@@ -10,21 +10,25 @@ public class Etudiant extends Utilisateur{
 	public Etudiant(String log){
 
 		this.login = log;
-		this.password = DBUser.DBgetParam("password", "Etudiant", "login", this.login);
-		this.nom = DBUser.DBgetParam("nom", "Etudiant", "login", this.login);
-		this.prenom = DBUser.DBgetParam("prenom", "Etudiant", "login", this.login);
-		String nomClasse = DBUser.DBgetParam("classe", "Etudiant", "login", this.login);
-		this.classe = DBUser.DBgenererClasse(nomClasse);
-		int[] listeIdNotes = DBUser.DBgetListeIdNotesEtudiant(this.login);
+		this.password = DBgetParam("password", "Etudiant", "login", this.login);
+		this.nom = DBgetParam("nom", "Etudiant", "login", this.login);
+		this.prenom = DBgetParam("prenom", "Etudiant", "login", this.login);
+		
+		String nomClasse = DBgetParam("classe", "Etudiant", "login", this.login);
+		this.classe = new Classe(nomClasse);
+		
+		int[] listeIdNotes = DBgetListeIdNotesEtudiant(this.login);
 		this.listeNotes = new Note[listeIdNotes.length];
-		this.listeNotes = DBUser.getListeNotesEtudiant(listeIdNotes);
+		for(int i = 0; i < listeIdNotes.length; i++){
+			listeNotes[i] = new Note(listeIdNotes[i]);
+		}
 	}
 
 	public Classe getClasse(){return this.classe;}
 	public Note[] getListeNotes(){return this.listeNotes;}
 
 	public void faireReclamation(String reclamation, Note note){
-		DBEcole.DBfaireReclamation(reclamation, note);
+		DBfaireReclamation(reclamation, note);
 	}
 
 	/*public void consulterNotes(){

@@ -19,7 +19,7 @@ create table Module
 	nomFiliere VARCHAR(255) NOT NULL,
 	semestre1 boolean NOT NULL DEFAULT false,
 	semestre2 boolean DEFAULT false,
-	PRIMARY KEY (nom, nomFiliere),
+	PRIMARY KEY (nom),
 	FOREIGN KEY (nomFiliere) REFERENCES Filiere(nom)
 );
 

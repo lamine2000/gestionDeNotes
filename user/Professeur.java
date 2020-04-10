@@ -11,32 +11,32 @@ public class Professeur extends Utilisateur{
 	public Professeur(){}
 	public Professeur(String log){
 		this.login = log;
-		this.password = DBUser.DBgetParamUser("password", "Professeur", "login", this.login);
-		this.nom = DBUser.DBgetParamUser("nom", "Professeur", "login", this.login);
-		this.prenom = DBUser.DBgetParamUser("prenom", "Professeur", "login", this.login);
+		this.password = DBgetParamUser("password", "Professeur", "login", this.login);
+		this.nom = DBgetParamUser("nom", "Professeur", "login", this.login);
+		this.prenom = DBgetParamUser("prenom", "Professeur", "login", this.login);
 		
-		String[] listeNomClassesProfesseur = DBUser.DBgetListeNomClassesProfesseur(this.login);
+		String[] listeNomClassesProfesseur = DBgetListeNomClassesProfesseur(this.login);
 		listeClasses = new Classe[listeNomClassesProfesseur.length];
 		for(int i = 0; i<listeClasses.length; i++){
-			listeClasses[i] = DBUser.DBgenererClasse(listeNomClassesProfesseur[i]);
+			listeClasses[i] = new Classe(listeNomClassesProfesseur[i]);
 		}
 
-		String[] listeNomMatieresProfesseur = DBUser.DBgetListeNomMatieresProfesseur(this.login);
+		String[] listeNomMatieresProfesseur = DBgetListeNomMatieresProfesseur(this.login);
 		listeCours = new Matiere[listeNomMatieresProfesseur.length];
 		for(int i = 0; i<listeClasses.length; i++){
-			listeCours[i] = DBUser.DBgenererMatiere(listeNomMatieresProfesseur[i]);
+			listeCours[i] = new Matiere(listeNomMatieresProfesseur[i]);
 		}
 	}
 
 	public void saisirNote(Etudiant etu, Note note){
-		DBUser.DBsaisirNote(etu, note);
+		DBsaisirNote(etu, note);
 	}
 
 	public void modifierNote(Etudiant etu, Note note, double bonus){
-		DBUser.DBmodifierNote(etu, note, bonus);
+		DBmodifierNote(etu, note, bonus);
 	}
 
 	public void supprimerNote(Etudiant etu, Note note){
-		DBUser.DBsupprimerNote(etu, note);
+		DBsupprimerNote(etu, note);
 	}
 }

@@ -15,7 +15,10 @@ public class Note{
 		this.id = identifiant;
 		this.valeur = DBgetParam("valeur", "Note", "id", identifiant);
 		this.type = DBgetParam("typeNote", "Note", "id" ,identifiant);
-		this.matiere = DBgetParam("matiere", "Note", "id" ,identifiant);
+		
+		String nomMatiere = DBgetParam("matiere", "Note", "id" ,identifiant);
+		this.matiere = new Matiere(nomMatiere);
+		
 		this.loginEtudiant = DBgetParam("loginEtudiant", "Note", "id" ,identifiant);
 		this.reclamation = DBgetParam("reclamation", "Note", "id" ,identifiant);
 	}

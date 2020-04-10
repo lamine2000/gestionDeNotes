@@ -10,7 +10,9 @@ public class Matiere {
 	public Matiere(String nomMatiere){
 		this.nom = nomMatiere;
 		this.coefficient = DBgetParam("coefficient", "Matiere", "nom", nomMatiere);
-		this.module = DBgetParam("nomModule", "Matiere", "nom", nomMatiere);
+		
+		String nomModule = DBgetParam("nomModule", "Matiere", "nom", nomMatiere);
+		this.module = new Module(nomModule);
 	}
 
 	public String getNom(){return this.nom;}

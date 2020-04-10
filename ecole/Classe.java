@@ -13,16 +13,16 @@ public class Classe{
 		
 		this.nom = nomClasse;
 		
-		String nomFiliere = DBEcole.DBgetParam("nomFiliere", "Classe", "nom", nomClasse);
+		String nomFiliere = DBgetParam("nomFiliere", "Classe", "nom", nomClasse);
 		Filiere filiere = new Filiere(nomFilere);
 		
-		String[] listeLoginEtudiants = DBEcole.DBgetListeLoginEtudiantsClasse(nomClasse);
+		String[] listeLoginEtudiants = DBgetListeLoginEtudiantsClasse(nomClasse);
 		listeEtudiant = new Etudiant[listeLoginEtudiants.length];
 		for(int i = 0; i<listeEtudiants.length; i++){
 			listeEtudiants[i] = new Etudiant(listeLoginEtudiants[i]);
 		}
 
-		String[] listeLoginProfesseurs = DBEcole.DBgetListeLoginProfesseursClasse(nomClasse); 	//select distinct login 
+		String[] listeLoginProfesseurs = DBgetListeLoginProfesseursClasse(nomClasse); 	//select distinct login 
 																								//from professeur
 																								//where classe1 = nomClasse or classe2 = nomclasse or...or classe5 = nomClasse;
 		listeProfesseurs = new Professeur[listeLoginProfesseurs.length];
@@ -37,10 +37,10 @@ public class Classe{
 	public Professeur[] getListeProfesseurs(){return this.listeProfesseurs;}
 
 	public void ajouterEtudiant(Etudiant etu){
-		DBEcole.DBajouterEtudiant(etu);
+		DBajouterEtudiant(etu);
 	}
 
 	public void retirerEtudiant(Etudiant etu){
-		DBEcole.DBretirerEtudiant(etu);
+		DBretirerEtudiant(etu);
 	}
 }
