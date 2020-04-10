@@ -23,7 +23,7 @@ public class Module {
 	public String getNom(){return this.nom;}
 	public Filiere getFiliere(){return this.filiere;}
 	public Boolean[] getSemestres(){return this.semestres;}
-	public Matiere[] listeMatieres(){return this.listeMatieres;}
+	public Matiere[] getListeMatieres(){return this.listeMatieres;}
 
 	public void ajouterMatiere(Matiere matiere){
 		DBajouterMatiere(matiere);
