@@ -15,4 +15,15 @@ public class Filiere {
 			listeModules[i] = new Module(listeNomModulesFiliere[i]);
 		}
 	}
+
+	public String getNom(){return this.nom;}
+	public Module[] getListeModules(){return this.listeModules;}
+
+	public void ajouterMatiere(Matiere matiere){
+		DBajouterMatiere(matiere);
+	}
+
+	public void retirerMatiere(Matiere matiere){
+		DBretirerMatiere(matiere);
+	}
 }
