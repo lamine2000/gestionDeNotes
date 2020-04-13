@@ -1,4 +1,4 @@
-//package db;
+package db;
 
 import db.DBConnect;
 import java.sql.*;
@@ -150,10 +150,5 @@ public class DBUser{
 		finally{
 			return liste;
 		}
-	}
-
-	public static void main(String[] args) {
-		int a = DBrechercherUser("lmzo", "qsdfjklm");
-		System.out.println(a);
 	}
 }
