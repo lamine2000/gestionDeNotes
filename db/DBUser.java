@@ -91,16 +91,14 @@ public class DBUser{
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
-		
-		for(i = 0; i < 5; i++)
-			liste[i] = null;
 
 		try{
-			for(i=0; i<5; i++){
-				result = state.executeQuery("SELECT classe"+i+1+" FROM Professeur WHERE login = "+log);
+			for(i=1; i<=5; i++){
+	
+				result = state.executeQuery("SELECT classe"+i+" FROM Professeur WHERE login ='"+log+"'");
 
-				if(result.next())
-					liste[i] = result.getObject(1).toString();
+				if(result.next() && result.getObject(1) != null)
+					liste[i-1] = result.getObject(1).toString();
 			}
 			
 			state.close();
@@ -117,7 +115,7 @@ public class DBUser{
 
 	public static String[] DBgetListeNomMatieresProfesseur(String log){
 		int i = 0;
-		String[] liste = new String[5];
+		String[] liste = new String[2];
 
 		Statement state = null;
 		ResultSet result = null;
@@ -129,16 +127,13 @@ public class DBUser{
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
-		
-		for(i = 0; i < 2; i++)
-			liste[i] = null;
 
 		try{
-			for(i=0; i<2; i++){
-				result = state.executeQuery("SELECT cours"+i+1+" FROM Professeur WHERE login = "+log);
+			for(i=1; i<=2; i++){
+				result = state.executeQuery("SELECT cours"+i+" FROM Professeur WHERE login ='"+log+"'");
 
-				if(result.next())
-					liste[i] = result.getObject(1).toString();
+				if(result.next() && result.getObject(1) != null)
+					liste[i-1] = result.getObject(1).toString();
 			}
 			
 			state.close();
@@ -151,4 +146,11 @@ public class DBUser{
 			return liste;
 		}
 	}
+
+	/*public static void main(String[] args) {
+		String[] param = DBgetListeNomClassesProfesseur("tftp");
+		
+		for(String elt : param)
+			System.out.println(elt);
+	}*/
 }
