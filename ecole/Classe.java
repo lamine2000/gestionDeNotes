@@ -22,11 +22,9 @@ public class Classe{
 			listeEtudiants[i] = new Etudiant(listeLoginEtudiants[i]);
 		}
 
-		String[] listeLoginProfesseurs = DBgetListeLoginProfesseursClasse(nomClasse); 	//select distinct login 
-																								//from professeur
-																								//where classe1 = nomClasse or classe2 = nomclasse or...or classe5 = nomClasse;
+		String[] listeLoginProfesseurs = DBgetListeLoginProfesseursClasse(nomClasse);
 		listeProfesseurs = new Professeur[listeLoginProfesseurs.length];
-		for(int i = 0; i<listeEtudiants.length; i++){
+		for(int i = 0; i<listeProfesseurs.length; i++){
 			listeProfesseurs[i] = new Professeur(listeLoginProfesseurs[i]);
 		}
 	}
@@ -41,6 +39,6 @@ public class Classe{
 	}
 
 	public void retirerEtudiant(Etudiant etu){
-		DBretirerEtudiant(etu);
+		DBretirerEtudiant(etu.getLogin());
 	}
 }

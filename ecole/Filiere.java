@@ -19,11 +19,11 @@ public class Filiere {
 	public String getNom(){return this.nom;}
 	public Module[] getListeModules(){return this.listeModules;}
 
-	public void ajouterMatiere(Matiere matiere){
-		DBajouterMatiere(matiere);
+	public void ajouterModule(Module module){
+		DBajouterModule(module);
 	}
 
-	public void retirerMatiere(Matiere matiere){
-		DBretirerMatiere(matiere);
+	public void retirerModule(String nomModule){
+		DBretirerModule(nomModule);
 	}
 }

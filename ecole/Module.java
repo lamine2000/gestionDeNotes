@@ -29,7 +29,7 @@ public class Module {
 		DBajouterMatiere(matiere);
 	}
 
-	public void retirerMatiere(Matiere matiere){
-		dBretirerMariere(matiere);
+	public void retirerMatiere(String nomMatiere){
+		DBretirerMariere(nomMatiere);
 	}
 }

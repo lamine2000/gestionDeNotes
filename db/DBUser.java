@@ -159,7 +159,6 @@ public class DBUser{
 //voir dans openclassrooms comment se connecter en mode ecriture (constructeur avk parametres d'un objet statement)
 public static void DBfaireReclamation(String reclamation, int idNote){
 	Statement state = null;
-	ResultSet result = null;
 	Connection conn = DBConnect.getInstance().getConn();
 
 	try{
@@ -169,9 +168,8 @@ public static void DBfaireReclamation(String reclamation, int idNote){
 	}
 
 	try{
-		result = state.executeQuery("UPDATE Note SET reclamation = '"+reclamation+"' WHERE id = "+idNote+"");
+		state.executeUpdate("UPDATE Note SET reclamation = '"+reclamation+"' WHERE id = "+idNote+"");
 		state.close();
-		result.close();
 	}catch(Exception e){
 		System.out.println("Echec de communication avec la base de donnees");
 	}
@@ -184,7 +182,6 @@ public static void DBfaireReclamation(String reclamation, int idNote){
 
 public static void DBsaisirNote(Note note){
 	Statement state = null;
-	ResultSet result = null;
 	Connection conn = DBConnect.getInstance().getConn();
 
 	try{
@@ -194,9 +191,8 @@ public static void DBsaisirNote(Note note){
 	}
 
 	try{
-		result = state.executeQuery("INSERT INTO Note (valeur, typeNote, matiere, loginEtudiant) VALUES ("+note.getValeur()+",'"+String.valueOf(note.getType())+"','"+note.getMatiere().getNom()+"','"+note.getLoginEtudiant()+"')");
+		state.executeUpdate("INSERT INTO Note (valeur, typeNote, matiere, loginEtudiant) VALUES ("+note.getValeur()+",'"+String.valueOf(note.getType())+"','"+note.getMatiere().getNom()+"','"+note.getLoginEtudiant()+"')");
 		state.close();
-		result.close();
 	}catch(Exception e){
 		System.out.println("Echec de communication avec la base de donnees");
 	}
@@ -208,7 +204,6 @@ public static void DBsaisirNote(Note note){
 
 public static void DBmodifierNote(int idNote, double bonus){
 	Statement state = null;
-	ResultSet result = null;
 	Connection conn = DBConnect.getInstance().getConn();
 
 	try{
@@ -218,9 +213,8 @@ public static void DBmodifierNote(int idNote, double bonus){
 	}
 
 	try{
-		result = state.executeQuery("UPDATE Note SET valeur = valeur+"+bonus+" WHERE id = "+idNote+"");
+		state.executeQuery("UPDATE Note SET valeur = valeur+"+bonus+" WHERE id = "+idNote+"");
 		state.close();
-		result.close();
 	}catch(Exception e){
 		System.out.println("Echec de communication avec la base de donnees");
 	}
@@ -233,7 +227,6 @@ public static void DBmodifierNote(int idNote, double bonus){
 
 public static void DBsupprimerNote(int idNote){
 	Statement state = null;
-	ResultSet result = null;
 	Connection conn = DBConnect.getInstance().getConn();
 
 	try{
@@ -243,7 +236,7 @@ public static void DBsupprimerNote(int idNote){
 	}
 
 	try{
-		result = state.executeQuery("DELETE FROM Note WHERE id = "+idNote+"");
+		state.executeUpdate("DELETE FROM Note WHERE id = "+idNote+"");
 		state.close();
 		result.close();
 	}catch(Exception e){

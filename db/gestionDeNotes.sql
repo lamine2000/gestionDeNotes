@@ -117,11 +117,8 @@ select * from Filiere;
 INSERT INTO Module
 VALUES
 ("informatique","DUT2", true, true),
-("mathematiques", "DUT2", true, false),
 ("general", "DUT2", true, false),
-("informatique","DST2", true, true),
-("mathematiques", "DST2", true, false),
-("general", "DST2", true, false);
+("mathematiques", "DST2", true, false);
 
 select * from Module;
 
