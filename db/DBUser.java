@@ -1,6 +1,7 @@
 package db;
 
 import db.DBConnect;
+import ecole.Note;
 import java.sql.*;
 
 //ici sont definies l'ensemble des fonctions qui permettent aux utilisateurs de communiquer avec la base de données
@@ -18,8 +19,8 @@ public class DBUser{
 		Connection conn = DBConnect.getInstance().getConn();
 		
 		try{
-			state1 = conn.createStatement();
-			state2 = conn.createStatement();
+			state1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			state2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation des Statements");
 		}
@@ -47,6 +48,7 @@ public class DBUser{
 		return authentified;
 	}
 
+	/**************************************************************************************************************** */
 
 	public static String DBgetParam(String nomParam, String nomTable, String nomIdentifiant, String valeurIdentifiant){
 		String param = "";
@@ -56,7 +58,7 @@ public class DBUser{
 		Connection conn = DBConnect.getInstance().getConn();
 		
 		try{
-			state = conn.createStatement();
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
@@ -77,6 +79,9 @@ public class DBUser{
 		return param;
 	}
 
+
+	/**************************************************************************************************************** */
+
 	public static String[] DBgetListeNomClassesProfesseur(String log){
 		int i = 0;
 		String[] liste = new String[5];
@@ -87,7 +92,7 @@ public class DBUser{
 		Connection conn = DBConnect.getInstance().getConn();
 		
 		try{
-			state = conn.createStatement();
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
@@ -112,6 +117,7 @@ public class DBUser{
 		}
 	}
 
+/**************************************************************************************************************** */
 
 	public static String[] DBgetListeNomMatieresProfesseur(String log){
 		int i = 0;
@@ -123,7 +129,7 @@ public class DBUser{
 		Connection conn = DBConnect.getInstance().getConn();
 		
 		try{
-			state = conn.createStatement();
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
@@ -147,10 +153,105 @@ public class DBUser{
 		}
 	}
 
-	/*public static void main(String[] args) {
-		String[] param = DBgetListeNomClassesProfesseur("tftp");
-		
-		for(String elt : param)
-			System.out.println(elt);
-	}*/
+
+/**************************************************************************************************************** */
+
+//voir dans openclassrooms comment se connecter en mode ecriture (constructeur avk parametres d'un objet statement)
+public static void DBfaireReclamation(String reclamation, int idNote){
+	Statement state = null;
+	ResultSet result = null;
+	Connection conn = DBConnect.getInstance().getConn();
+
+	try{
+		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	}catch(Exception e){
+		System.out.println("Erreur de creation du Statement");
+	}
+
+	try{
+		result = state.executeQuery("UPDATE Note SET reclamation = '"+reclamation+"' WHERE id = "+idNote+"");
+		state.close();
+		result.close();
+	}catch(Exception e){
+		System.out.println("Echec de communication avec la base de donnees");
+	}
+}
+
+
+
+/**************************************************************************************************************** */
+
+
+public static void DBsaisirNote(Note note){
+	Statement state = null;
+	ResultSet result = null;
+	Connection conn = DBConnect.getInstance().getConn();
+
+	try{
+		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	}catch(Exception e){
+		System.out.println("Erreur de creation du Statement");
+	}
+
+	try{
+		result = state.executeQuery("INSERT INTO Note (valeur, typeNote, matiere, loginEtudiant) VALUES ("+note.getValeur()+",'"+String.valueOf(note.getType())+"','"+note.getMatiere().getNom()+"','"+note.getLoginEtudiant()+"')");
+		state.close();
+		result.close();
+	}catch(Exception e){
+		System.out.println("Echec de communication avec la base de donnees");
+	}
+}
+
+
+/**************************************************************************************************************** */
+
+
+public static void DBmodifierNote(int idNote, double bonus){
+	Statement state = null;
+	ResultSet result = null;
+	Connection conn = DBConnect.getInstance().getConn();
+
+	try{
+		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	}catch(Exception e){
+		System.out.println("Erreur de creation du Statement");
+	}
+
+	try{
+		result = state.executeQuery("UPDATE Note SET valeur = valeur+"+bonus+" WHERE id = "+idNote+"");
+		state.close();
+		result.close();
+	}catch(Exception e){
+		System.out.println("Echec de communication avec la base de donnees");
+	}
+}
+
+
+
+/**************************************************************************************************************** */
+
+
+public static void DBsupprimerNote(int idNote){
+	Statement state = null;
+	ResultSet result = null;
+	Connection conn = DBConnect.getInstance().getConn();
+
+	try{
+		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	}catch(Exception e){
+		System.out.println("Erreur de creation du Statement");
+	}
+
+	try{
+		result = state.executeQuery("DELETE FROM Note WHERE id = "+idNote+"");
+		state.close();
+		result.close();
+	}catch(Exception e){
+		System.out.println("Echec de communication avec la base de donnees");
+	}
+}
+
+
+
+/**************************************************************************************************************** */
 }

@@ -28,11 +28,12 @@ public class Etudiant extends Utilisateur{
 	public Note[] getListeNotes(){return this.listeNotes;}
 
 	public void faireReclamation(String reclamation, Note note){
-		DBfaireReclamation(reclamation, note);
+		DBfaireReclamation(reclamation, note.getId());
 	}
 
 	/*public void consulterNotes(){
 		//a faire avec l'interface graphique
 
 	}*/
+	
 }

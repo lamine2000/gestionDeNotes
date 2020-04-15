@@ -28,15 +28,15 @@ public class Professeur extends Utilisateur{
 		}
 	}
 
-	public void saisirNote(Etudiant etu, Note note){
-		DBsaisirNote(etu, note);
+	public void saisirNote(Note note){
+		DBsaisirNote(note);
 	}
 
-	public void modifierNote(Etudiant etu, Note note, double bonus){
-		DBmodifierNote(etu, note, bonus);
+	public void modifierNote(Note note, double bonus){
+		DBmodifierNote(note.getId(), bonus);
 	}
 
-	public void supprimerNote(Etudiant etu, Note note){
-		DBsupprimerNote(etu, note);
+	public void supprimerNote(Note note){
+		DBsupprimerNote(note.getId());
 	}
 }

@@ -25,7 +25,7 @@ public class Note{
 	
 	public int getId(){return this.id;}
 	public double getValeur(){return this.valeur;}
-	public EnumTypeNote geType(){return this.type;}
+	public EnumTypeNote getType(){return this.type;}
 	public Matiere getMatiere(){return this.matiere;}
 	public String getLoginEtudiant(){return this.loginEtudiant;}
 	public String getReclamation(){return this.reclamation;}
