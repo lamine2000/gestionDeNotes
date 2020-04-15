@@ -3,7 +3,6 @@ package db;
 import db.DBConnect;
 import user.*;
 import ecole.*;
-import ecole.Module;
 
 import java.sql.*;
 
