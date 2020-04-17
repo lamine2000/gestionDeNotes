@@ -1,5 +1,6 @@
 package ecole;
 import db.DBEcole;
+import ecole.Module;
 
 public class Matiere {
 	private String nom;
@@ -9,9 +10,9 @@ public class Matiere {
 	public Matiere(){}
 	public Matiere(String nomMatiere){
 		this.nom = nomMatiere;
-		this.coefficient = DBgetParam("coefficient", "Matiere", "nom", nomMatiere);
+		this.coefficient = Integer.parseInt(DBEcole.DBgetParam("coefficient", "Matiere", "nom", nomMatiere));
 		
-		String nomModule = DBgetParam("nomModule", "Matiere", "nom", nomMatiere);
+		String nomModule = DBEcole.DBgetParam("nomModule", "Matiere", "nom", nomMatiere);
 		this.module = new Module(nomModule);
 	}
 

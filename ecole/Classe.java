@@ -1,6 +1,7 @@
 package ecole;
-import db.DBecole;
-import user.Etudiant;
+import db.DBEcole;
+import user.*;
+import ecole.Filiere;
 
 public class Classe{
 	private String nom;
@@ -13,16 +14,16 @@ public class Classe{
 		
 		this.nom = nomClasse;
 		
-		String nomFiliere = DBgetParam("nomFiliere", "Classe", "nom", nomClasse);
+		String nomFiliere = DBEcole.DBgetParam("nomFiliere", "Classe", "nom", nomClasse);
 		Filiere filiere = new Filiere(nomFilere);
 		
-		String[] listeLoginEtudiants = DBgetListeLoginEtudiantsClasse(nomClasse);
+		String[] listeLoginEtudiants = DBEcole.DBgetListeLoginEtudiantsClasse(nomClasse);
 		listeEtudiant = new Etudiant[listeLoginEtudiants.length];
 		for(int i = 0; i<listeEtudiants.length; i++){
 			listeEtudiants[i] = new Etudiant(listeLoginEtudiants[i]);
 		}
 
-		String[] listeLoginProfesseurs = DBgetListeLoginProfesseursClasse(nomClasse);
+		String[] listeLoginProfesseurs = DBEcole.DBgetListeLoginProfesseursClasse(nomClasse);
 		listeProfesseurs = new Professeur[listeLoginProfesseurs.length];
 		for(int i = 0; i<listeProfesseurs.length; i++){
 			listeProfesseurs[i] = new Professeur(listeLoginProfesseurs[i]);
@@ -35,10 +36,10 @@ public class Classe{
 	public Professeur[] getListeProfesseurs(){return this.listeProfesseurs;}
 
 	public void ajouterEtudiant(Etudiant etu){
-		DBajouterEtudiant(etu);
+		DBEcole.DBajouterEtudiant(etu);
 	}
 
 	public void retirerEtudiant(Etudiant etu){
-		DBretirerEtudiant(etu.getLogin());
+		DBEcole.DBretirerEtudiant(etu.getLogin());
 	}
 }

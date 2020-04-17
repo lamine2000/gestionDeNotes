@@ -1,5 +1,7 @@
 package ecole;
 import db.DBEcole;
+import ecole.Matiere;
+import ecole.Filiere;
 
 public class Module {
 	private String nom;
@@ -10,10 +12,11 @@ public class Module {
 	public Module(){}
 	public Module(String nomModule){
 		this.nom = nomModule;
-		this.filiere = new Filiere(filiere);
-		this.semestres = DBgetSemestresModule(nomModule);
+		String nomFiliere = DBEcole.DBgetParam("nomFiliere", "Module", "nom", nomModule);
+		this.filiere = new Filiere(nomFiliere);
+		this.semestres = DBEcole.DBgetSemestresModule(nomModule);
 		
-		String[] listeNomMatieres = DBgetListeNomMatieresModule(nomModule);
+		String[] listeNomMatieres = DBEcole.DBgetListeNomMatieresModule(nomModule);
 		listeMatieres = new Matiere[listeNomMatieres.length];
 		for(int i = 0; i < listeNomMatieres.length; i++){
 			listeMatieres[i] = new Matiere(listeNomMatieres[i]);
@@ -26,10 +29,10 @@ public class Module {
 	public Matiere[] getListeMatieres(){return this.listeMatieres;}
 
 	public void ajouterMatiere(Matiere matiere){
-		DBajouterMatiere(matiere);
+		DBEcole.DBajouterMatiere(matiere);
 	}
 
 	public void retirerMatiere(String nomMatiere){
-		DBretirerMariere(nomMatiere);
+		DBEcole.DBretirerMariere(nomMatiere);
 	}
 }

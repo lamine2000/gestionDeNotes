@@ -3,7 +3,6 @@ package db;
 import db.DBConnect;
 import user.*;
 import ecole.*;
-
 import java.sql.*;
 
 //ici sont definies l'ensemble des fonctions qui permettent l'instanciation d'objets relatif à l'ecole, en se basant sur les données enregistrées dans la db
@@ -12,7 +11,7 @@ public class DBEcole {
 
 	public static String[] DBgetListeLoginEtudiantsClasse(String nomClasse){
 		
-		String[] liste;
+		String[] liste = null;
 		int taille = 0;
 		Statement state = null;
 		ResultSet result = null;
@@ -20,7 +19,7 @@ public class DBEcole {
 		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
-			conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
@@ -53,7 +52,7 @@ public class DBEcole {
 
 
 	public static String[] DBgetListeLoginProfesseursClasse(String nomClasse){
-		String[] liste;
+		String[] liste = null;
 		int taille = 0;
 		Statement state = null;
 		ResultSet result = null;
@@ -61,7 +60,7 @@ public class DBEcole {
 		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
-			conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
@@ -139,7 +138,7 @@ public class DBEcole {
 /**************************************************************************************************************** */
 
 
-	public static void DBajouterModule(Module module){
+	public static void DBajouterModule(ecole.Module mod){
 		Statement state = null;
 
 		Connection conn = DBConect.getInstance().getConn();
@@ -151,7 +150,7 @@ public class DBEcole {
 		}
 
 		try{
-			state.executeUpdate("INSERT INTO Module VALUES ('"+module.getNom()+"', '"+module.getFiliere().getNom()+"', "+module.getSemestres()[0]+", "+module.getSemestres()[1]+")");
+			state.executeUpdate("INSERT INTO Module VALUES ('"+mod.getNom()+"', '"+mod.getFiliere().getNom()+"', "+mod.getSemestres()[0]+", "+mod.getSemestres()[1]+")");
 			state.close();
 		}catch(Exception e){
 			System.out.println("Echec de communication avec la base de donnees");
@@ -236,7 +235,7 @@ public class DBEcole {
 
 
 	public static String[] DBgetListeNomModulesFiliere(String nomFiliere){
-		String[] liste;
+		String[] liste = null;
 		int taille = 0;
 		Statement state = null;
 		ResultSet result = null;
@@ -267,6 +266,9 @@ public class DBEcole {
 			state.close();
 		} catch(Exception e){
 			System.out.println("Echec de communication avec la base de donnees");
+		}
+		finally{
+			return liste;
 		}
 	}
 
@@ -314,7 +316,7 @@ public class DBEcole {
 
 
 	public static String[] DBgetListeNomMatieresModule(String nomModule){
-		String[] liste;
+		String[] liste = null;
 		int taille = 0;
 		Statement state = null;
 		ResultSet result = null;
@@ -346,5 +348,74 @@ public class DBEcole {
 		} catch(Exception e){
 			System.out.println("Echec de communication avec la base de donnees");
 		}
+		finally{
+			return liste;
+		}
 	}
+
+
+/**************************************************************************************************************** */
+
+
+	public static String DBgetParam(String nomParam, String nomTable, String nomIdentifiant, String valeurIdentifiant){
+		String param = "";
+		Statement state = null;
+		ResultSet result = null;
+
+		Connection conn = DBConnect.getInstance().getConn();
+		
+		try{
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+		
+		try{
+			result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" where "+nomIdentifiant+"='"+valeurIdentifiant+"'");
+
+			if(result.next())
+				param = result.getObject(1).toString();
+
+			state.close();
+			result.close();
+
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		
+		return param;
+	}
+
+
+/**************************************************************************************************************** */
+
+
+public static String DBgetParam2(String nomParam, String nomTable, String nomIdentifiant, int valeurIdentifiant){
+	String param = "";
+	Statement state = null;
+	ResultSet result = null;
+
+	Connection conn = DBConnect.getInstance().getConn();
+	
+	try{
+		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	} catch(Exception e){
+		System.out.println("Erreur de creation du Statement");
+	}
+	
+	try{
+		result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" where "+nomIdentifiant+"="+valeurIdentifiant+"");
+
+		if(result.next())
+			param = result.getObject(1).toString();
+
+		state.close();
+		result.close();
+
+	} catch(Exception e){
+		System.out.println("Echec de communication avec la base de donnees");
+	}
+	
+	return param;
+}
 }

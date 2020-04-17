@@ -238,7 +238,6 @@ public static void DBsupprimerNote(int idNote){
 	try{
 		state.executeUpdate("DELETE FROM Note WHERE id = "+idNote+"");
 		state.close();
-		result.close();
 	}catch(Exception e){
 		System.out.println("Echec de communication avec la base de donnees");
 	}
@@ -247,4 +246,43 @@ public static void DBsupprimerNote(int idNote){
 
 
 /**************************************************************************************************************** */
+
+
+	public static int[] DBgetListeIdNotesEtudiant(String log){
+		int[] liste = null;
+		int taille = 0;
+		Statement state = null;
+		ResultSet result = null;
+
+		Connection conn = DBConnect.getInstance().getConn();
+
+		try{
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+
+		try{
+			result = state.executeQuery("SELECT id FROM Note WHERE loginEtudiant = '"+log+"'");
+
+			while(result.next())
+				taille++;
+
+			liste = new int[taille];
+			result.relative(-1*taille);
+			taille = 0;
+			
+			while(result.next()){
+				liste[taille] = result.getInt(1);
+				taille++;
+			}
+			result.close();
+			state.close();
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		finally{
+			return liste;
+		}
+	}
 }
