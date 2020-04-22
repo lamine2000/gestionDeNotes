@@ -1,4 +1,5 @@
 package ecole;
+
 import db.DBEcole;
 import ecole.EnumTypeNote;
 import ecole.Matiere;
@@ -12,17 +13,26 @@ public class Note{
 	private String reclamation;
     
     public Note() {}
-    public Note(int identifiant/*double vvaleur, EnumTypeNote vtype, Matiere vmatiere, String vloginEtudiant*/) {
+    public Note(int identifiant) {
 		this.id = identifiant;
 		this.valeur = Double.parseDouble(DBEcole.DBgetParam2("valeur", "Note", "id", identifiant));
 		this.type = EnumTypeNote.valueOf(DBEcole.DBgetParam2("typeNote", "Note", "id" ,identifiant));
-		
-		String nomMatiere = DBEcole.DBgetParam2("matiere", "Note", "id" ,identifiant);
-		this.matiere = new Matiere(nomMatiere);
-		
+
 		this.loginEtudiant = DBEcole.DBgetParam2("loginEtudiant", "Note", "id" ,identifiant);
 		this.reclamation = DBEcole.DBgetParam2("reclamation", "Note", "id" ,identifiant);
 	}
+
+	public void constructMatiere(){
+		String nomMatiere = DBEcole.DBgetParam2("matiere", "Note", "id" ,this.id);
+		this.matiere = new Matiere(nomMatiere);
+	}
+
+	public void setId(int vid){this.id = vid;}
+	public void setValeur(double vvaleur){this.valeur = vvaleur;}
+	public void setType(EnumTypeNote vtype){this.type = vtype;}
+	public void setMatiere(Matiere vmatiere){this.matiere = vmatiere;}
+	public void setLogin(String vloginEtudiant){this.loginEtudiant = vloginEtudiant;}
+	public void setReclamation(String vreclamation){this.reclamation = vreclamation;}
 	
 	public int getId(){return this.id;}
 	public double getValeur(){return this.valeur;}

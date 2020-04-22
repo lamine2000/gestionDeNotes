@@ -168,7 +168,7 @@ public static void DBfaireReclamation(String reclamation, int idNote){
 	}
 
 	try{
-		state.executeUpdate("UPDATE Note SET reclamation = '"+reclamation+"' WHERE id = "+idNote+"");
+		state.executeUpdate("UPDATE Note SET reclamation = '"+reclamation+"' WHERE id = "+idNote);
 		state.close();
 	}catch(Exception e){
 		System.out.println("Echec de communication avec la base de donnees");
@@ -253,7 +253,7 @@ public static void DBsupprimerNote(int idNote){
 		int taille = 0;
 		Statement state = null;
 		ResultSet result = null;
-
+		
 		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
@@ -269,7 +269,7 @@ public static void DBsupprimerNote(int idNote){
 				taille++;
 
 			liste = new int[taille];
-			result.relative(-1*taille);
+			result.relative(-1*taille - 1);
 			taille = 0;
 			
 			while(result.next()){

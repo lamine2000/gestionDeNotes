@@ -31,7 +31,7 @@ public class DBEcole {
 				taille++;
 			
 			liste = new String[taille];
-			result.relative(-1*taille);
+			result.relative(-1*taille - 1);
 
 			taille = 0;
 			while(result.next()){
@@ -72,7 +72,7 @@ public class DBEcole {
 				taille++;
 			
 			liste = new String[taille];
-			result.relative(-1*taille);
+			result.relative(-1*taille - 1);
 
 			taille = 0;
 			while(result.next()){
@@ -95,7 +95,7 @@ public class DBEcole {
 	public static void DBajouterEtudiant(Etudiant etu){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -118,7 +118,7 @@ public class DBEcole {
 	public static void DBretirerEtudiant(String log){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -141,7 +141,7 @@ public class DBEcole {
 	public static void DBajouterModule(ecole.Module mod){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -165,7 +165,7 @@ public class DBEcole {
 	public static void DBretirerModule(String nomModule){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -189,7 +189,7 @@ public class DBEcole {
 	public static void DBajouterMatiere(Matiere matiere){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -213,7 +213,7 @@ public class DBEcole {
 	public static void DBretirerMatiere(String nomMatiere){
 		Statement state = null;
 
-		Connection conn = DBConect.getInstance().getConn();
+		Connection conn = DBConnect.getInstance().getConn();
 
 		try{
 			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -255,7 +255,7 @@ public class DBEcole {
 				taille++;
 
 			liste = new String[taille];
-			result.relative(-1*taille);
+			result.relative(-1*taille - 1);
 			taille = 0;
 			
 			while(result.next()){
@@ -291,13 +291,13 @@ public class DBEcole {
 		}
 
 		try{
-			result1 = state.executeQuery("SELECT semestre1 FROM Module WHERE nom = '"+nomModule+"'");
-			result2 = state.executeQuery("SELECT semestre2 FROM Module WHERE nom = '"+nomModule+"'");
+			result1 = state1.executeQuery("SELECT semestre1 FROM Module WHERE nom = '"+nomModule+"'");
+			result2 = state2.executeQuery("SELECT semestre2 FROM Module WHERE nom = '"+nomModule+"'");
 			
 			if(result1.next())
-				liste[0] = Boolean.valueOf(result.getObject(1));
+				liste[0] = Boolean.valueOf(result1.getObject(1).toString());
 			if(result2.next())
-				liste[1] = Boolean.valueOf(result.getObject(1));
+				liste[1] = Boolean.valueOf(result2.getObject(1).toString());
 			
 			result1.close();
 			result2.close();
@@ -336,7 +336,7 @@ public class DBEcole {
 				taille++;
 
 			liste = new String[taille];
-			result.relative(-1*taille);
+			result.relative(-1*taille - 1);
 			taille = 0;
 			
 			while(result.next()){
@@ -369,16 +369,15 @@ public class DBEcole {
 		} catch(Exception e){
 			System.out.println("Erreur de creation du Statement");
 		}
-		
+
 		try{
 			result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" where "+nomIdentifiant+"='"+valeurIdentifiant+"'");
-
-			if(result.next())
+				
+			if(result.next() && result.getObject(1) != null)
 				param = result.getObject(1).toString();
 
 			state.close();
 			result.close();
-
 		} catch(Exception e){
 			System.out.println("Echec de communication avec la base de donnees");
 		}
@@ -390,32 +389,32 @@ public class DBEcole {
 /**************************************************************************************************************** */
 
 
-public static String DBgetParam2(String nomParam, String nomTable, String nomIdentifiant, int valeurIdentifiant){
-	String param = "";
-	Statement state = null;
-	ResultSet result = null;
+	public static String DBgetParam2(String nomParam, String nomTable, String nomIdentifiant, int valeurIdentifiant){
+		String param = "";
+		Statement state = null;
+		ResultSet result = null;
 
-	Connection conn = DBConnect.getInstance().getConn();
-	
-	try{
-		state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	} catch(Exception e){
-		System.out.println("Erreur de creation du Statement");
+		Connection conn = DBConnect.getInstance().getConn();
+		
+		try{
+			state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch(Exception e){
+			System.out.println("Erreur de creation du Statement");
+		}
+		
+		try{
+			result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" WHERE "+nomIdentifiant+" = "+valeurIdentifiant);
+
+			if(result.next() && result.getObject(1) != null)
+				param = result.getObject(1).toString();
+
+			state.close();
+			result.close();
+
+		} catch(Exception e){
+			System.out.println("Echec de communication avec la base de donnees");
+		}
+		
+		return param;
 	}
-	
-	try{
-		result = state.executeQuery("SELECT "+nomParam+" FROM "+nomTable+" where "+nomIdentifiant+"="+valeurIdentifiant+"");
-
-		if(result.next())
-			param = result.getObject(1).toString();
-
-		state.close();
-		result.close();
-
-	} catch(Exception e){
-		System.out.println("Echec de communication avec la base de donnees");
-	}
-	
-	return param;
-}
 }

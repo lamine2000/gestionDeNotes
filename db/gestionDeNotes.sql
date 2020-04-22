@@ -93,11 +93,11 @@ DESC TypeNote;
 create table Note
 (
 	id int AUTO_INCREMENT PRIMARY KEY,
-	valeur FLOAT NOT NULL,
+	valeur DOUBLE NOT NULL,
 	typeNote VARCHAR(255) NOT NULL,
 	matiere VARCHAR(255) NOT NULL,
 	loginEtudiant VARCHAR(255) NOT NULL,
-	reclamation VARCHAR(255),
+	reclamation VARCHAR(255) DEFAULT '',
 	FOREIGN KEY (matiere) REFERENCES Matiere(nom),
 	FOREIGN KEY (loginEtudiant) REFERENCES Etudiant(login),
 	FOREIGN KEY (typeNote) REFERENCES TypeNote(type),
@@ -148,7 +148,7 @@ VALUES
 ("poo", 3, "informatique"),
 ("programmation web", 3, "informatique"),
 ("administration des reseaux", 2, "informatique"),
-("modelisation des systemes d'information", 4, "informatique"),
+("modelisation des systemes d information", 4, "informatique"),
 ("statistiques",2,"mathematiques"),
 ("recherche operationnelle",2,"mathematiques"),
 ("gestion de projets",2,"mathematiques"),
@@ -160,7 +160,7 @@ select * from Matiere;
 
 INSERT INTO Professeur(login, password, nom, prenom, cours1, cours2, classe1, classe2, classe3)
 VALUES
-("waid","javamsi","diaw","samba","poo","modelisation des systemes d'information","DSTI2-A","DSTI2-B",NULL),
+("waid","javamsi","diaw","samba","poo","modelisation des systemes d information","DSTI2-A","DSTI2-B",NULL),
 ("avantminuit","linux","ba","mandicou","utilisation des se",NULL,"DSTI2-A","DSTI2-B","DUT2"),
 ("tftp","voiture","ouya","samuel","administration des reseaux",NULL,"DSTI2-A","DSTI2-B","DUT2");
 

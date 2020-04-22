@@ -1,4 +1,5 @@
 package ecole;
+
 import db.DBEcole;
 import ecole.Matiere;
 import ecole.Filiere;
@@ -12,27 +13,35 @@ public class Module {
 	public Module(){}
 	public Module(String nomModule){
 		this.nom = nomModule;
-		String nomFiliere = DBEcole.DBgetParam("nomFiliere", "Module", "nom", nomModule);
-		this.filiere = new Filiere(nomFiliere);
 		this.semestres = DBEcole.DBgetSemestresModule(nomModule);
-		
-		String[] listeNomMatieres = DBEcole.DBgetListeNomMatieresModule(nomModule);
-		listeMatieres = new Matiere[listeNomMatieres.length];
-		for(int i = 0; i < listeNomMatieres.length; i++){
-			listeMatieres[i] = new Matiere(listeNomMatieres[i]);
-		}
 	}
+
+	public void constructFiliere(){
+		String nomFiliere = DBEcole.DBgetParam("nomFiliere", "Module", "nom", this.nom);
+		this.filiere = new Filiere(nomFiliere);
+	}
+	public void constructListeMatieres(){
+		String[] listeNomMatieres = DBEcole.DBgetListeNomMatieresModule(this.nom);
+		listeMatieres = new Matiere[listeNomMatieres.length];
+		for(int i = 0; i < listeNomMatieres.length; i++)
+			listeMatieres[i] = new Matiere(listeNomMatieres[i]);
+	}
+
+	public void setNom(String vnom){this.nom = vnom;}
+	public void setFiliere(Filiere vfiliere){this.filiere = vfiliere;}
+	public void setSemestres(Boolean[] vsemestres){this.semestres = vsemestres;}
+	public void setListeMatieres(Matiere[] vlisteMatieres){this.listeMatieres = vlisteMatieres;}
 
 	public String getNom(){return this.nom;}
 	public Filiere getFiliere(){return this.filiere;}
 	public Boolean[] getSemestres(){return this.semestres;}
 	public Matiere[] getListeMatieres(){return this.listeMatieres;}
 
-	public void ajouterMatiere(Matiere matiere){
+	public static void ajouterMatiere(Matiere matiere){
 		DBEcole.DBajouterMatiere(matiere);
 	}
 
-	public void retirerMatiere(String nomMatiere){
-		DBEcole.DBretirerMariere(nomMatiere);
+	public static void retirerMatiere(String nomMatiere){
+		DBEcole.DBretirerMatiere(nomMatiere);
 	}
 }

@@ -1,4 +1,5 @@
 package user;
+
 import db.DBUser;
 
 public class Utilisateur{
