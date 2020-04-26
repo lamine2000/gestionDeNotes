@@ -152,7 +152,7 @@ VALUES
 ("statistiques",2,"mathematiques"),
 ("recherche operationnelle",2,"mathematiques"),
 ("gestion de projets",2,"mathematiques"),
-("gestion d'entreprise",2,"general"),
+("gestion d entreprise",2,"general"),
 ("anglais",2,"general"),
 ("culture et societes",2,"general");
 
