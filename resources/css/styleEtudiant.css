@@ -9,7 +9,7 @@
 .button{
 	-fx-padding: 10.0;
 	-fx-background-color:grey;
-	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 );
 	-fx-background-radius:5.0px;
 }
 
@@ -32,7 +32,7 @@
 .text-area{
 	-fx-font-style:italic;
 	-fx-font-size:18.0;
-	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 );
 }
 
 .table-view{
@@ -52,4 +52,3 @@
 #zoneId{
 	-fx-font-size:14.0px;
 }
-
