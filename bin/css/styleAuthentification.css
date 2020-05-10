@@ -1,0 +1,42 @@
+.button{
+	-fx-padding: 10.0;
+	-fx-background-color:grey;
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+	-fx-background-radius:5.0px;
+}
+
+.button:hover{
+	-fx-background-color:orange;
+	-fx-cursor:hand;
+}
+
+.button:pressed{
+	-fx-effect: innershadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 20.0,0.0,0.0,0.0 );
+}
+
+#title{
+	-fx-font-size: 40.0px;
+	-fx-font-style: italic;
+	-fx-font-family:Pacifico,"serif";
+	-fx-font-weight: bold;
+	-fx-text-color:orange;
+}
+
+#conteneur{
+	-fx-effect: innershadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 20.0,0.0,0.0,0.0 );
+ 	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+ 	-fx-background-image:url('https://i.imgur.com/saBl1jp.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+}
+
+.label{
+	-fx-font-weight: bold;
+	-fx-font-style:italic;
+	-fx-font-size:15.0px;
+	-fx-text-fill:orange;
+}
+
+.text-field:hover{
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+}

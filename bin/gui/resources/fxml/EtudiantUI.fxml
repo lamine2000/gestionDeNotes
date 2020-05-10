@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="conteneur2" fx:id="conteneur2"
+	maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.ControllerEtudiant">
+	<children>
+		<TableView fx:id="tableau" blendMode="DIFFERENCE"
+			prefHeight="600.0" prefWidth="468.0">
+			<columns>
+				<TableColumn fx:id="col_id" editable="false"
+					prefWidth="47.0" text="id" />
+				<TableColumn fx:id="col_mat" editable="false"
+					prefWidth="160.0" text="Matiere" />
+				<TableColumn fx:id="col_typ" editable="false"
+					minWidth="2.0" prefWidth="50.0" text="type" />
+				<TableColumn fx:id="col_not" editable="false"
+					prefWidth="53.0" text="note" />
+				<TableColumn fx:id="col_rec" editable="false"
+					prefWidth="155.0" text="reclamation" />
+			</columns>
+		</TableView>
+		<Button fx:id="validerBtn" layoutX="570.0" layoutY="546.0"
+			mnemonicParsing="false" onAction="#handleValiderButtonAction"
+			text="valider reclamation" AnchorPane.rightAnchor="54.0" />
+		<Button id="disconnectBtn" fx:id="deconnecterBtn"
+			layoutX="625.0" mnemonicParsing="false"
+			onAction="#handleDeconnecterButtonAction" text="se deconnecter"
+			textFill="#cf301d">
+			<font>
+				<Font size="16.0" />
+			</font>
+		</Button>
+		<TextArea fx:id="zoneRec" layoutX="477.0" layoutY="278.0"
+			prefHeight="243.0" prefWidth="269.0"
+			promptText="Pour faire une réclamation, veuillez saisir dans le champ ci dessus l'id de la note correspondante, et dans ce second champ, justifier cette réclamation avant de valider.                                                G.D.N"
+			wrapText="true" AnchorPane.leftAnchor="477.0"
+			AnchorPane.rightAnchor="54.0">
+			<font>
+				<Font size="23.0" />
+			</font>
+		</TextArea>
+		<Label fx:id="labelPrenom" layoutX="480.0" layoutY="92.0"
+			styleClass="label-spe" text="Label" />
+		<Label fx:id="labelNom" layoutX="561.0" layoutY="47.0"
+			styleClass="label-spe" text="Label" />
+		<TextArea id="zoneId" fx:id="zoneId" depthTest="DISABLE"
+			layoutX="480.0" layoutY="237.0" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefHeight="35.0" prefWidth="60.0" promptText="id"
+			AnchorPane.leftAnchor="477.0" />
+	</children>
+</AnchorPane>

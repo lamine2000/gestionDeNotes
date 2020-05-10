@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox id="conteneur3" fx:id="conteneur3" blendMode="DIFFERENCE"
+	maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.ControllerProfesseur">
+	<children>
+		<TabPane fx:id="tabPane" prefHeight="700.0" prefWidth="682.0"
+			tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab fx:id="tab1" text="Classe1">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TableView fx:id="tableau1" blendMode="DIFFERENCE"
+									editable="true" prefHeight="200.0" prefWidth="200.0"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+									<columns>
+										<TableColumn fx:id="col_nom1" editable="false"
+											prefWidth="129.0" text="Nom" />
+										<TableColumn fx:id="col_prenom1" editable="false"
+											prefWidth="311.0" text="Prenom" />
+										<TableColumn fx:id="col_tp1" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="TP" />
+										<TableColumn fx:id="col_cc1" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="CC" />
+										<TableColumn fx:id="col_ds1"
+											onEditCommit="#handleModifierNote" prefWidth="84.0" text="DS" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tab2" text="Classe2">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TableView fx:id="tableau2" blendMode="DIFFERENCE"
+									editable="true" prefHeight="200.0" prefWidth="200.0"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+									<columns>
+										<TableColumn fx:id="col_nom2" editable="false"
+											prefWidth="129.0" text="Nom" />
+										<TableColumn fx:id="col_prenom2" editable="false"
+											prefWidth="311.0" text="Prenom" />
+										<TableColumn fx:id="col_tp2" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="TP" />
+										<TableColumn fx:id="col_cc2" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="CC" />
+										<TableColumn fx:id="col_ds2"
+											onEditCommit="#handleModifierNote" prefWidth="84.0" text="DS" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tab3" text="Classe3">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TableView fx:id="tableau3" blendMode="DIFFERENCE"
+									editable="true" prefHeight="200.0" prefWidth="200.0"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+									<columns>
+										<TableColumn fx:id="col_nom3" editable="false"
+											prefWidth="129.0" text="Nom" />
+										<TableColumn fx:id="col_prenom3" editable="false"
+											prefWidth="311.0" text="Prenom" />
+										<TableColumn fx:id="col_tp3" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="TP" />
+										<TableColumn fx:id="col_cc3" minWidth="0.0"
+											onEditCommit="#handleModifierNote" text="CC" />
+										<TableColumn fx:id="col_ds3"
+											onEditCommit="#handleModifierNote" prefWidth="84.0" text="DS" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tabRec" text="Reclamations">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="659.0" prefWidth="623.0">
+							<children>
+								<TableView fx:id="tableauRec" blendMode="DIFFERENCE"
+									editable="true" layoutX="-1.0" prefHeight="659.0"
+									prefWidth="696.0" AnchorPane.bottomAnchor="0.0"
+									AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-14.0"
+									AnchorPane.topAnchor="0.0">
+									<columns>
+										<TableColumn fx:id="col_nom" editable="false"
+											prefWidth="78.0" text="Nom" />
+										<TableColumn fx:id="col_prenom"
+											onEditCommit="#handleModifierNote" prefWidth="107.0"
+											text="Prenom" />
+										<TableColumn fx:id="col_classe" editable="false"
+											prefWidth="104.0" text="Classe" />
+										<TableColumn fx:id="col_type" editable="false"
+											prefWidth="55.0" text="Type" />
+										<TableColumn fx:id="col_note"
+											onEditCommit="#handleModifierNote" prefWidth="68.0"
+											text="Note" />
+										<TableColumn fx:id="col_rec" prefWidth="268.0"
+											text="Reclamation" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+		<VBox prefHeight="700.0" prefWidth="220.0">
+			<children>
+				<Button id="disconnectBtn" fx:id="deconnecterBtn"
+					mnemonicParsing="false" onAction="#handleDeconnecterButtonAction"
+					text="se deconnecter" textFill="#4afff6">
+					<font>
+						<Font size="22.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="23.0" />
+					</VBox.margin>
+				</Button>
+				<AnchorPane prefHeight="306.0" prefWidth="219.0">
+					<VBox.margin>
+						<Insets />
+					</VBox.margin>
+					<children>
+						<Label fx:id="labelNom" layoutX="66.0" layoutY="29.0"
+							styleClass="label-spe" text="Label" />
+						<Label fx:id="labelPrenom" layoutX="6.0" layoutY="77.0"
+							styleClass="label-spe" text="Label" />
+						<Text id="nomMat" fx:id="nomMat" fontSmoothingType="LCD"
+							layoutX="17.0" layoutY="251.0" strokeType="OUTSIDE"
+							strokeWidth="0.0" text="Text" underline="true"
+							wrappingWidth="185.0" />
+					</children>
+				</AnchorPane>
+				<MenuButton fx:id="menuMatBtn" mnemonicParsing="false"
+					prefHeight="82.0" prefWidth="187.0" text="Choisir Cours"
+					VBox.vgrow="NEVER">
+					<items>
+						<MenuItem fx:id="choixMat1" mnemonicParsing="false"
+							onAction="#handleChoixCoursButtonAction" text="cours 1" />
+						<MenuItem fx:id="choixMat2" mnemonicParsing="false"
+							onAction="#handleChoixCoursButtonAction" text="cours 2" />
+					</items>
+					<VBox.margin>
+						<Insets left="16.0" top="71.0" />
+					</VBox.margin>
+				</MenuButton>
+			</children>
+		</VBox>
+	</children>
+</HBox>

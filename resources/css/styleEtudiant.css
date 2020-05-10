@@ -1,0 +1,55 @@
+#conteneur2{
+	-fx-background-image:url('https://videosanimadosexplicativos.com/wp-content/uploads//2019/02/PrAn-Prova-Background.jpg');
+	-fx-background-position: center center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	-fx-font-size:16.0px;
+	}
+
+.button{
+	-fx-padding: 10.0;
+	-fx-background-color:grey;
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+	-fx-background-radius:5.0px;
+}
+
+.button:hover{
+	-fx-background-color:orange;
+	-fx-cursor:hand;
+}
+
+.button:pressed{
+	-fx-effect: innershadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 20.0,0.0,0.0,0.0 );
+}
+
+#disconnectBtn{
+	-fx-background-color:transparent;
+	-fx-font-style:italic;
+	-fx-font-weight:bold;
+	-fx-font-size:15.0px;
+}
+
+.text-area{
+	-fx-font-style:italic;
+	-fx-font-size:18.0;
+	-fx-effect: dropshadow( gaussian , rgba(0.0,0.0,0.0,0.8) , 10.0,0.0,0.0,1.0 ); 
+}
+
+.table-view{
+	-fx-background-radius:15.0px;
+	-fx-font-family:'serif';
+	-fx-font-size:18.0px;
+	-fx-font-weight:bold;
+}
+
+.label-spe{
+	-fx-font-family:'Pacifico','serif';
+	-fx-font-size:30.0px;
+	-fx-font-weight:bold;
+	-fx-font-style:italic;
+}
+
+#zoneId{
+	-fx-font-size:14.0px;
+}
+
